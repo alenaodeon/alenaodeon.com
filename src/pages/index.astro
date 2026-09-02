@@ -79,7 +79,7 @@ const principles = [
   <!-- ===== Selected work ===== -->
   <section class="section" id="work">
     <div class="wrap">
-      <SectionHead num="01" label="Selected work" title="Products I've shipped" moreHref="/experience" moreLabel="Full experience" />
+      <SectionHead label="Selected work" title="Products I've shipped" moreHref="/experience" moreLabel="Full experience" />
       <div class="grid grid-2">
         {experience.map((entry) => <ExperienceCard entry={entry} />)}
       </div>
@@ -89,7 +89,7 @@ const principles = [
   <!-- ===== How I work ===== -->
   <section class="section" id="principles">
     <div class="wrap">
-      <SectionHead num="02" label="How I work" title="Four things I believe about building AI products" />
+      <SectionHead label="How I work" title="Four things I believe about building AI products" />
       <div class="grid grid-2 principles">
         {principles.map((p) => (
           <div class="card principle">
@@ -105,7 +105,7 @@ const principles = [
   <!-- ===== Projects ===== -->
   <section class="section" id="projects">
     <div class="wrap">
-      <SectionHead num="03" label="Projects" title="Side projects and experiments" moreHref={projects.length ? '/projects' : undefined} />
+      <SectionHead label="Projects" title="Side projects and experiments" moreHref={projects.length ? '/projects' : undefined} />
       {projects.length > 0 ? (
         <div class="grid grid-3">{projects.map((entry) => <ProjectCard entry={entry} />)}</div>
       ) : (
@@ -121,7 +121,7 @@ const principles = [
   <!-- ===== Writing ===== -->
   <section class="section" id="writing">
     <div class="wrap">
-      <SectionHead num="04" label="Writing" title="Notes on building AI products" moreHref={posts.length ? '/blog' : undefined} moreLabel="All posts" />
+      <SectionHead label="Writing" title="Notes on building AI products" moreHref={posts.length ? '/blog' : undefined} moreLabel="All posts" />
       {posts.length > 0 ? (
         <div>{posts.map((entry) => <PostRow entry={entry} />)}</div>
       ) : (
