@@ -7,7 +7,7 @@ const year = date.getFullYear();
 ---
 <a class="card pj" href={`/projects/${entry.id}`}>
   <div class="meta">
-    <span class="label">{year}</span>
+    <span class="mono">{year}</span>
     <span class:list={['status', status.replace(' ', '-')]}>{status}</span>
   </div>
   <h3 class="title">{title}</h3>
@@ -18,7 +18,7 @@ const year = date.getFullYear();
 <style>
   .pj { display: flex; flex-direction: column; }
   .meta { display: flex; justify-content: space-between; align-items: center; }
-  .status { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 6px; background: var(--accent-soft); color: var(--accent-ink); }
+  .status { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.04em; padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-ink); }
   .status.in-progress { background: #fff3d6; color: #8a5a00; }
   .status.experiment { background: #ece8ff; color: #4b3fa8; }
   .status.archived { background: var(--bg-2); color: var(--muted); }

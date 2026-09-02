@@ -6,7 +6,7 @@ const { title, description, pubDate, tags } = entry.data;
 const fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 ---
 <a class="row" href={`/blog/${entry.id}`}>
-  <span class="label date">{fmt.format(pubDate)}</span>
+  <span class="mono date">{fmt.format(pubDate)}</span>
   <span class="body">
     <span class="t">{title}</span>
     <span class="d">{description}</span>

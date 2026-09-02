@@ -33,9 +33,9 @@ const articleLd = {
     <div class="wrap narrow">
       <a class="link small" href="/blog">← All writing</a>
       <div class="meta">
-        <span class="label">{fmt.format(pubDate)}</span>
-        <span class="label">{minutes} min read</span>
-        {updatedDate && <span class="label">Updated {fmt.format(updatedDate)}</span>}
+        <span class="mono">{fmt.format(pubDate)}</span>
+        <span class="mono">{minutes} min read</span>
+        {updatedDate && <span class="mono">Updated {fmt.format(updatedDate)}</span>}
       </div>
       <h1 class="display">{title}</h1>
       <p class="lead" style="margin-top:16px">{description}</p>

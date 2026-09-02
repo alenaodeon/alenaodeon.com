@@ -18,8 +18,8 @@ const fmt = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' })
     <div class="wrap narrow">
       <a class="link small" href="/projects">← All projects</a>
       <div class="meta">
-        <span class="label">{fmt.format(date)}</span>
-        <span class="label" style="color:var(--accent-ink)">{status}</span>
+        <span class="mono">{fmt.format(date)}</span>
+        <span class="mono" style="color:var(--accent-ink)">{status}</span>
       </div>
       <h1 class="display">{title}</h1>
       <p class="lead" style="margin-top:16px">{description}</p>

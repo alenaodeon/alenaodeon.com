@@ -6,7 +6,7 @@ const { company, role, period, summary, highlights, tags } = entry.data;
 ---
 <a class="card xp" href={`/experience#${entry.id}`}>
   <div class="meta">
-    <span class="label">{period}</span>
+    <span class="mono">{period}</span>
     <span class="company">{company}</span>
   </div>
   <h3 class="title">{role}</h3>
@@ -28,6 +28,6 @@ const { company, role, period, summary, highlights, tags } = entry.data;
   .company { font-weight: 600; font-size: 14px; color: var(--accent-ink); }
   .hl { margin-top: 14px; padding-left: 0; display: grid; gap: 8px; font-size: 15px; color: var(--ink-2); }
   .hl li { position: relative; padding-left: 18px; }
-  .hl li::before { content: ''; position: absolute; left: 2px; top: 0.6em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .hl li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 8px; height: 2px; background: var(--accent); }
   .foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: auto; padding-top: 18px; }
 </style>

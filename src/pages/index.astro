@@ -47,8 +47,10 @@ const principles = [
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <span class="label">{site.role} · {site.location}</span>
-        <h1 class="display">I take AI products from <em>conception to launch</em>.</h1>
+        <span class="mono eyebrow">{site.role} · {site.location}</span>
+        <h1 class="display">
+          I take AI products from <em>conception to launch</em>.<span class="cursor" aria-hidden="true"></span>
+        </h1>
         <p class="lead">
           At Cybus I lead the agentic-AI initiative: shipped <strong>Connectware GPT</strong> 0→1, our LLM assistant now in public beta, and built our <strong>MCP server</strong> 0→1, an API surface for AI agents working with millions of live data points from major German industrial players.
         </p>
@@ -67,7 +69,9 @@ const principles = [
       </div>
 
       <div class="hero-photo">
-        <img src="/images/alena.jpg" srcset="/images/alena-600.jpg 600w, /images/alena.jpg 1200w" sizes="(max-width: 860px) 80vw, 400px" width="1000" height="1250" alt={`${site.name}, ${site.role}`} fetchpriority="high" />
+        <div class="frame">
+          <img src="/images/alena.jpg" srcset="/images/alena-600.jpg 600w, /images/alena.jpg 1200w" sizes="(max-width: 860px) 70vw, 420px" width="1000" height="1250" alt={`${site.name}, ${site.role}`} fetchpriority="high" />
+        </div>
       </div>
     </div>
   </section>
@@ -76,10 +80,10 @@ const principles = [
   <section class="facts-strip">
     <div class="wrap">
       <dl class="facts">
-        <div><dt class="label">Currently</dt><dd>AI Product Manager, Cybus</dd></div>
-        <div><dt class="label">Focus</dt><dd>LLM assistants · MCP &amp; agent tooling · AI governance</dd></div>
-        <div><dt class="label">Background</dt><dd>B.Sc. Applied Mathematics &amp; CS (AI) · M.Sc. Management, TUM</dd></div>
-        <div><dt class="label">Previously</dt><dd>HealthTech PM at wellabe</dd></div>
+        <div><dt class="mono">Currently</dt><dd>AI Product Manager, Cybus</dd></div>
+        <div><dt class="mono">Focus</dt><dd>LLM assistants · MCP &amp; agent tooling · AI governance</dd></div>
+        <div><dt class="mono">Background</dt><dd>B.Sc. Applied Mathematics &amp; CS (AI) · M.Sc. Management, TUM</dd></div>
+        <div><dt class="mono">Previously</dt><dd>HealthTech PM at wellabe</dd></div>
       </dl>
     </div>
   </section>
@@ -87,7 +91,7 @@ const principles = [
   <!-- ===== Selected work ===== -->
   <section class="section" id="work">
     <div class="wrap">
-      <SectionHead label="Selected work" title="Products I've shipped" moreHref="/experience" moreLabel="Full experience" />
+      <SectionHead label="01 — Selected work" title="Products I've shipped" moreHref="/experience" moreLabel="Full experience" />
       <div class="grid grid-2">
         {experience.map((entry) => <ExperienceCard entry={entry} />)}
       </div>
@@ -95,13 +99,13 @@ const principles = [
   </section>
 
   <!-- ===== How I work ===== -->
-  <section class="section alt" id="principles">
+  <section class="section" id="principles">
     <div class="wrap">
-      <SectionHead label="How I work" title="Four things I believe about building AI products" />
+      <SectionHead label="02 — How I work" title="Four things I believe about building AI products" />
       <div class="grid grid-2 principles">
         {principles.map((p) => (
           <div class="card principle">
-            <span class="num">{p.n}</span>
+            <span class="mono num">{p.n}</span>
             <h3 class="h3">{p.title}</h3>
             <p class="desc">{p.body}</p>
           </div>
@@ -113,12 +117,12 @@ const principles = [
   <!-- ===== Projects ===== -->
   <section class="section" id="projects">
     <div class="wrap">
-      <SectionHead label="Projects" title="Side projects and experiments" moreHref={projects.length ? '/projects' : undefined} />
+      <SectionHead label="03 — Projects" title="Side projects and experiments" moreHref={projects.length ? '/projects' : undefined} />
       {projects.length > 0 ? (
         <div class="grid grid-3">{projects.map((entry) => <ProjectCard entry={entry} />)}</div>
       ) : (
         <div class="empty">
-          <span class="label">Coming soon</span>
+          <span class="mono">// coming soon</span>
           <p>Write-ups of side projects and experiments are in progress. Until then, the best evidence of how I build is in my work at Cybus.</p>
           <a class="btn btn-ghost" href="/experience">Read the case studies</a>
         </div>
@@ -129,12 +133,12 @@ const principles = [
   <!-- ===== Writing ===== -->
   <section class="section" id="writing">
     <div class="wrap">
-      <SectionHead label="Writing" title="Notes on building AI products" moreHref={posts.length ? '/blog' : undefined} moreLabel="All posts" />
+      <SectionHead label="04 — Writing" title="Notes on building AI products" moreHref={posts.length ? '/blog' : undefined} moreLabel="All posts" />
       {posts.length > 0 ? (
         <div>{posts.map((entry) => <PostRow entry={entry} />)}</div>
       ) : (
         <div class="empty">
-          <span class="label">First post in draft</span>
+          <span class="mono">// first post in draft</span>
           <p>I'm writing about what it takes to ship LLM features that people can trust in production: evaluation, guardrails, and agent tooling. Until it lands here, I share shorter notes on LinkedIn.</p>
           <a class="btn btn-ghost" href={site.linkedin} target="_blank" rel="noopener">Follow on LinkedIn ↗</a>
         </div>
@@ -144,24 +148,29 @@ const principles = [
 </Base>
 
 <style>
-  .hero { padding: clamp(48px, 7vw, 96px) 0 clamp(40px, 5vw, 72px); }
-  .hero-grid { display: grid; gap: 48px; align-items: center; }
-  @media (min-width: 860px) { .hero-grid { grid-template-columns: 1.3fr 0.8fr; } }
+  .hero { position: relative; padding: clamp(48px, 7vw, 96px) 0 clamp(40px, 5vw, 64px); overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(var(--line-2) 1px, transparent 1px); background-size: 22px 22px; opacity: 0.55; mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 30%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 30%, transparent 75%); pointer-events: none; }
+  .hero-grid { position: relative; display: grid; gap: 48px; align-items: center; }
+  @media (min-width: 860px) { .hero-grid { grid-template-columns: 1.25fr 0.85fr; } }
   .hero-copy { display: grid; gap: 22px; }
   .hero-copy .display { max-width: 14ch; }
   .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
 
-  .hero-photo { justify-self: center; width: min(100%, 400px); }
-  .hero-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 20px; box-shadow: var(--shadow-lift); }
+  .hero-photo { position: relative; justify-self: center; width: min(100%, 420px); }
+  .frame { position: relative; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow-lift); background: var(--surface); }
+  .frame::after { content: ''; position: absolute; inset: 0; border-radius: 24px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4); pointer-events: none; }
+  .frame img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+  .hero-photo::before { content: ''; position: absolute; inset: 14px -14px -14px 14px; border-radius: 24px; border: 1px solid var(--accent); opacity: 0.5; z-index: -1; }
 
-  .facts-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); }
+  .facts-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
   .facts { margin: 0; display: grid; gap: 0; }
   @media (min-width: 720px) { .facts { grid-template-columns: repeat(4, 1fr); } .facts div + div { border-left: 1px solid var(--line); padding-left: 20px; } }
   .facts div { padding: 20px 0; }
   @media (max-width: 719px) { .facts div + div { border-top: 1px solid var(--line); } }
-  .facts dt { margin-bottom: 6px; }
-  .facts dd { margin: 0; font-weight: 600; font-size: 15px; }
+  .facts dt { margin-bottom: 4px; }
+  .facts dd { margin: 0; font-weight: 500; font-size: 15px; }
 
-  .principle .num { display: block; font-weight: 800; color: var(--accent); margin-bottom: 14px; font-size: 14px; letter-spacing: 0.06em; }
+  .principle { position: relative; }
+  .principle .num { display: block; color: var(--accent); margin-bottom: 14px; }
   .principle .h3 { margin-bottom: 10px; }
 </style>

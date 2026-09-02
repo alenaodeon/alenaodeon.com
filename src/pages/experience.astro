@@ -14,7 +14,7 @@ const education = [
 <Base title="Experience" description={`Work experience of ${site.name}: AI Product Manager at Cybus, HealthTech PM at wellabe, and the products shipped along the way.`}>
   <section class="page-head">
     <div class="wrap">
-      <span class="label">Experience</span>
+      <span class="mono eyebrow">Experience</span>
       <h1 class="page-title">What I've built, and what I owned.</h1>
       <p class="lead">Each role is written as a short case study: the context, what I was responsible for, and what came out of it. Where numbers are public, they're here. Where they aren't, I'm happy to walk through them in conversation.</p>
     </div>
@@ -26,7 +26,7 @@ const education = [
         {rendered.map(({ e, Content }) => (
           <li class="entry" id={e.id}>
             <aside class="meta">
-              <span class="label period">{e.data.period}</span>
+              <span class="mono period">{e.data.period}</span>
               <span class="company">{e.data.url ? <a href={e.data.url} target="_blank" rel="noopener">{e.data.company} ↗</a> : e.data.company}</span>
               {e.data.location && <span class="small muted">{e.data.location}</span>}
             </aside>
@@ -47,11 +47,11 @@ const education = [
 
   <section class="section">
     <div class="wrap">
-      <span class="label">Education</span>
+      <span class="mono eyebrow">Education</span>
       <div class="grid grid-2" style="margin-top:20px">
         {education.map((ed) => (
           <div class="card">
-            <span class="label">{ed.school}</span>
+            <span class="mono">{ed.school}</span>
             <h3 class="title">{ed.degree}</h3>
             <p class="desc">{ed.note}</p>
           </div>
@@ -62,17 +62,16 @@ const education = [
 </Base>
 
 <style>
-
   .timeline { display: grid; gap: 0; }
   .entry { display: grid; gap: 20px; padding: 44px 0; border-top: 1px solid var(--line); scroll-margin-top: 90px; }
   .entry:first-child { border-top: 0; padding-top: 8px; }
   @media (min-width: 860px) { .entry { grid-template-columns: 220px 1fr; gap: 48px; } .meta { position: sticky; top: 96px; align-self: start; } }
   .meta { display: grid; gap: 6px; }
-  .period { color: var(--accent); }
+  .period { color: var(--accent-ink); }
   .company { font-weight: 600; font-size: 18px; }
   .company a:hover { color: var(--accent-ink); }
   .hl { margin: 22px 0 6px; display: grid; gap: 10px; color: var(--ink); font-weight: 500; }
   .hl li { position: relative; padding-left: 22px; }
-  .hl li::before { content: ''; position: absolute; left: 2px; top: 0.62em; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .hl li::before { content: ''; position: absolute; left: 0; top: 0.65em; width: 10px; height: 2px; background: var(--accent); }
   .prose { margin-top: 22px; }
 </style>
