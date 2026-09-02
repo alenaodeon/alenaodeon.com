@@ -17,3 +17,7 @@ LOCAL-NOTES.md
 
 # Uploaded originals
 IMG_*.jpg
+
+# Uploaded originals (png)
+*.png
+!public/**/*.png
