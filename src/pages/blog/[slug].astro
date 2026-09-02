@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { site } from '../../config';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props as { entry: CollectionEntry<'blog'> };
+const { Content } = await render(entry);
+const { title, description, pubDate, updatedDate, tags } = entry.data;
+const fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const words = (entry.body ?? '').split(/\s+/).filter(Boolean).length;
+const minutes = Math.max(1, Math.round(words / 220));
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  author: { '@type': 'Person', name: site.name, url: site.url },
+  mainEntityOfPage: new URL(Astro.url.pathname.replace(/\.html$/, ''), Astro.site).toString(),
+};
+---
+<Base title={title} description={description} type="article" publishedTime={pubDate}>
+  <article class="section">
+    <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+    <div class="wrap narrow">
+      <a class="link small" href="/blog">← All writing</a>
+      <div class="meta">
+        <span class="label">{fmt.format(pubDate)}</span>
+        <span class="label">{minutes} min read</span>
+        {updatedDate && <span class="label">Updated {fmt.format(updatedDate)}</span>}
+      </div>
+      <h1 class="display">{title}</h1>
+      <p class="lead" style="margin-top:16px">{description}</p>
+      {tags.length > 0 && <div class="tags" style="margin-top:20px">{tags.map((t) => <span class="tag">{t}</span>)}</div>}
+      <div class="prose" style="margin-top:40px"><Content /></div>
+      <footer class="post-foot">
+        <p class="small muted">Written by {site.name}, {site.role} in {site.location}.</p>
+        <a class="link arrow" href={site.linkedin} target="_blank" rel="noopener">Discuss on LinkedIn</a>
+      </footer>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .narrow { max-width: 720px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 16px; margin: 28px 0 14px; }
+  .post-foot { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+</style>

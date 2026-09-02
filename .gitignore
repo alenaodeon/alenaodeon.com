@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+npm-debug.log*
+.env
+.env.*
+
+# Original full-resolution photo (web versions live in public/images/)
+7d6e6ff8-ed07-42b8-99ed-c191ec11e943.jpg
+
+# Local editor/tool config
+.claude/
+
+# Private working notes
+LOCAL-NOTES.md

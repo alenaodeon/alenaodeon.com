@@ -1,0 +1,11 @@
+---
+interface Props { label: string; title: string; moreHref?: string; moreLabel?: string; }
+const { label, title, moreHref, moreLabel = 'View all' } = Astro.props;
+---
+<div class="sec-head">
+  <div>
+    <span class="label">{label}</span>
+    <h2 class="h2">{title}</h2>
+  </div>
+  {moreHref && <a class="link arrow more" href={moreHref}>{moreLabel}</a>}
+</div>

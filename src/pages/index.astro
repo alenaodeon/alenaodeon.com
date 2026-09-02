@@ -1,0 +1,167 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PostRow from '../components/PostRow.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../config';
+
+const experience = (await getCollection('experience'))
+  .filter((e) => e.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const projects = (await getCollection('projects', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const principles = [
+  {
+    n: '01',
+    title: 'Ship the zero-to-one, then make it trustworthy.',
+    body: 'A first version proves the idea. Guardrails, governance and output quality are what turn it into a product people rely on. I own both halves.',
+  },
+  {
+    n: '02',
+    title: '"Mostly correct" is a demo, not a product.',
+    body: 'On a platform that runs factories, an LLM answer that is right 90% of the time is a liability. I treat evaluation as part of the product, with the same rigour as any other production system.',
+  },
+  {
+    n: '03',
+    title: 'Agents need an API surface, not a chat box.',
+    body: 'The useful AI products I have built expose capabilities (tools, data, permissions) that agents can compose. The conversation is the last mile, not the architecture.',
+  },
+  {
+    n: '04',
+    title: 'Math first, hype second.',
+    body: 'Applied mathematics and computer science are where I started. It shows up in how I frame problems, read model behaviour, and decide what to measure.',
+  },
+];
+---
+<Base>
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="label">{site.role} · {site.location}</span>
+        <h1 class="display">I take AI products from <em>conception to launch</em>.</h1>
+        <p class="lead">
+          At Cybus I lead the agentic-AI initiative: shipped <strong>Connectware GPT</strong> 0→1, our LLM assistant now in public beta, and built our <strong>MCP server</strong> 0→1, an API surface for AI agents working with millions of live data points from major German industrial players.
+        </p>
+        <p class="lead">
+          Beyond shipping, I own what makes AI products trustworthy: guardrails, governance, and output quality. On a platform that runs factories, "mostly correct" isn't good enough.
+        </p>
+        <div class="actions">
+          <a class="btn" href="/experience">See my work</a>
+          <a class="btn btn-ghost" href={site.linkedin} target="_blank" rel="noopener me">LinkedIn ↗</a>
+          <a class="btn btn-ghost" href={site.cv} download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg>
+            Download CV
+          </a>
+          <a class="btn btn-ghost" href={`mailto:${site.email}`}>Email</a>
+        </div>
+      </div>
+
+      <div class="hero-photo">
+        <img src="/images/alena.jpg" srcset="/images/alena-600.jpg 600w, /images/alena.jpg 1200w" sizes="(max-width: 860px) 80vw, 400px" width="1000" height="1250" alt={`${site.name}, ${site.role}`} fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Facts strip ===== -->
+  <section class="facts-strip">
+    <div class="wrap">
+      <dl class="facts">
+        <div><dt class="label">Currently</dt><dd>AI Product Manager, Cybus</dd></div>
+        <div><dt class="label">Focus</dt><dd>LLM assistants · MCP &amp; agent tooling · AI governance</dd></div>
+        <div><dt class="label">Background</dt><dd>B.Sc. Applied Mathematics &amp; CS (AI) · M.Sc. Management, TUM</dd></div>
+        <div><dt class="label">Previously</dt><dd>HealthTech PM at wellabe</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===== Selected work ===== -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <SectionHead label="Selected work" title="Products I've shipped" moreHref="/experience" moreLabel="Full experience" />
+      <div class="grid grid-2">
+        {experience.map((entry) => <ExperienceCard entry={entry} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== How I work ===== -->
+  <section class="section alt" id="principles">
+    <div class="wrap">
+      <SectionHead label="How I work" title="Four things I believe about building AI products" />
+      <div class="grid grid-2 principles">
+        {principles.map((p) => (
+          <div class="card principle">
+            <span class="num">{p.n}</span>
+            <h3 class="h3">{p.title}</h3>
+            <p class="desc">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Projects ===== -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <SectionHead label="Projects" title="Side projects and experiments" moreHref={projects.length ? '/projects' : undefined} />
+      {projects.length > 0 ? (
+        <div class="grid grid-3">{projects.map((entry) => <ProjectCard entry={entry} />)}</div>
+      ) : (
+        <div class="empty">
+          <span class="label">Coming soon</span>
+          <p>Write-ups of side projects and experiments are in progress. Until then, the best evidence of how I build is in my work at Cybus.</p>
+          <a class="btn btn-ghost" href="/experience">Read the case studies</a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- ===== Writing ===== -->
+  <section class="section" id="writing">
+    <div class="wrap">
+      <SectionHead label="Writing" title="Notes on building AI products" moreHref={posts.length ? '/blog' : undefined} moreLabel="All posts" />
+      {posts.length > 0 ? (
+        <div>{posts.map((entry) => <PostRow entry={entry} />)}</div>
+      ) : (
+        <div class="empty">
+          <span class="label">First post in draft</span>
+          <p>I'm writing about what it takes to ship LLM features that people can trust in production: evaluation, guardrails, and agent tooling. Until it lands here, I share shorter notes on LinkedIn.</p>
+          <a class="btn btn-ghost" href={site.linkedin} target="_blank" rel="noopener">Follow on LinkedIn ↗</a>
+        </div>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { padding: clamp(48px, 7vw, 96px) 0 clamp(40px, 5vw, 72px); }
+  .hero-grid { display: grid; gap: 48px; align-items: center; }
+  @media (min-width: 860px) { .hero-grid { grid-template-columns: 1.3fr 0.8fr; } }
+  .hero-copy { display: grid; gap: 22px; }
+  .hero-copy .display { max-width: 14ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+
+  .hero-photo { justify-self: center; width: min(100%, 400px); }
+  .hero-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 20px; box-shadow: var(--shadow-lift); }
+
+  .facts-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); }
+  .facts { margin: 0; display: grid; gap: 0; }
+  @media (min-width: 720px) { .facts { grid-template-columns: repeat(4, 1fr); } .facts div + div { border-left: 1px solid var(--line); padding-left: 20px; } }
+  .facts div { padding: 20px 0; }
+  @media (max-width: 719px) { .facts div + div { border-top: 1px solid var(--line); } }
+  .facts dt { margin-bottom: 6px; }
+  .facts dd { margin: 0; font-weight: 600; font-size: 15px; }
+
+  .principle .num { display: block; font-weight: 800; color: var(--accent); margin-bottom: 14px; font-size: 14px; letter-spacing: 0.06em; }
+  .principle .h3 { margin-bottom: 10px; }
+</style>

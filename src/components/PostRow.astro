@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { entry: CollectionEntry<'blog'>; }
+const { entry } = Astro.props;
+const { title, description, pubDate, tags } = entry.data;
+const fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+---
+<a class="row" href={`/blog/${entry.id}`}>
+  <span class="label date">{fmt.format(pubDate)}</span>
+  <span class="body">
+    <span class="t">{title}</span>
+    <span class="d">{description}</span>
+    {tags.length > 0 && <span class="tags">{tags.slice(0, 3).map((t) => <span class="tag">{t}</span>)}</span>}
+  </span>
+  <span class="arrow" aria-hidden="true"></span>
+</a>
+
+<style>
+  .row { display: grid; grid-template-columns: 120px 1fr auto; gap: 20px; align-items: start; padding: 22px 0; border-top: 1px solid var(--line); transition: background 0.15s; }
+  .row:last-child { border-bottom: 1px solid var(--line); }
+  .row:hover .t { color: var(--accent-ink); }
+  .date { padding-top: 5px; }
+  .body { display: grid; gap: 6px; }
+  .t { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; transition: color 0.15s; }
+  .d { color: var(--ink-2); font-size: 15.5px; }
+  .tags { margin-top: 6px; }
+  @media (max-width: 640px) { .row { grid-template-columns: 1fr; gap: 6px; } }
+</style>

@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { entry: CollectionEntry<'experience'>; }
+const { entry } = Astro.props;
+const { company, role, period, summary, highlights, tags } = entry.data;
+---
+<a class="card xp" href={`/experience#${entry.id}`}>
+  <div class="meta">
+    <span class="label">{period}</span>
+    <span class="company">{company}</span>
+  </div>
+  <h3 class="title">{role}</h3>
+  <p class="desc">{summary}</p>
+  {highlights.length > 0 && (
+    <ul class="hl">
+      {highlights.slice(0, 3).map((h) => <li>{h}</li>)}
+    </ul>
+  )}
+  <div class="foot">
+    <div class="tags">{tags.slice(0, 4).map((t) => <span class="tag">{t}</span>)}</div>
+    <span class="link arrow small">Details</span>
+  </div>
+</a>
+
+<style>
+  .xp { display: flex; flex-direction: column; gap: 4px; }
+  .meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .company { font-weight: 600; font-size: 14px; color: var(--accent-ink); }
+  .hl { margin-top: 14px; padding-left: 0; display: grid; gap: 8px; font-size: 15px; color: var(--ink-2); }
+  .hl li { position: relative; padding-left: 18px; }
+  .hl li::before { content: ''; position: absolute; left: 2px; top: 0.6em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: auto; padding-top: 18px; }
+</style>

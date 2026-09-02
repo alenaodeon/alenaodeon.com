@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { site } from '../config';
+
+const entries = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(entries.map(async (e) => ({ e, Content: (await render(e)).Content })));
+
+const education = [
+  { school: 'Technical University of Munich (TUM)', degree: 'M.Sc. Management', note: 'Business and technology, with a focus on product and innovation.' },
+  { school: 'B.Sc. Applied Mathematics & Computer Science', degree: 'Major in Artificial Intelligence', note: 'The quantitative foundation behind how I evaluate models and frame product problems.' },
+];
+---
+<Base title="Experience" description={`Work experience of ${site.name}: AI Product Manager at Cybus, HealthTech PM at wellabe, and the products shipped along the way.`}>
+  <section class="page-head">
+    <div class="wrap">
+      <span class="label">Experience</span>
+      <h1 class="page-title">What I've built, and what I owned.</h1>
+      <p class="lead">Each role is written as a short case study: the context, what I was responsible for, and what came out of it. Where numbers are public, they're here. Where they aren't, I'm happy to walk through them in conversation.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <ol class="timeline">
+        {rendered.map(({ e, Content }) => (
+          <li class="entry" id={e.id}>
+            <aside class="meta">
+              <span class="label period">{e.data.period}</span>
+              <span class="company">{e.data.url ? <a href={e.data.url} target="_blank" rel="noopener">{e.data.company} ↗</a> : e.data.company}</span>
+              {e.data.location && <span class="small muted">{e.data.location}</span>}
+            </aside>
+            <div class="body">
+              <h2 class="h2">{e.data.role}</h2>
+              <p class="lead" style="margin-top:12px">{e.data.summary}</p>
+              {e.data.highlights.length > 0 && (
+                <ul class="hl">{e.data.highlights.map((h) => <li>{h}</li>)}</ul>
+              )}
+              <div class="prose"><Content /></div>
+              {e.data.tags.length > 0 && <div class="tags" style="margin-top:26px">{e.data.tags.map((t) => <span class="tag">{t}</span>)}</div>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <span class="label">Education</span>
+      <div class="grid grid-2" style="margin-top:20px">
+        {education.map((ed) => (
+          <div class="card">
+            <span class="label">{ed.school}</span>
+            <h3 class="title">{ed.degree}</h3>
+            <p class="desc">{ed.note}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+
+  .timeline { display: grid; gap: 0; }
+  .entry { display: grid; gap: 20px; padding: 44px 0; border-top: 1px solid var(--line); scroll-margin-top: 90px; }
+  .entry:first-child { border-top: 0; padding-top: 8px; }
+  @media (min-width: 860px) { .entry { grid-template-columns: 220px 1fr; gap: 48px; } .meta { position: sticky; top: 96px; align-self: start; } }
+  .meta { display: grid; gap: 6px; }
+  .period { color: var(--accent); }
+  .company { font-weight: 600; font-size: 18px; }
+  .company a:hover { color: var(--accent-ink); }
+  .hl { margin: 22px 0 6px; display: grid; gap: 10px; color: var(--ink); font-weight: 500; }
+  .hl li { position: relative; padding-left: 22px; }
+  .hl li::before { content: ''; position: absolute; left: 2px; top: 0.62em; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .prose { margin-top: 22px; }
+</style>

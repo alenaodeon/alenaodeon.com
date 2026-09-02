@@ -1,0 +1,34 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../../config';
+
+const projects = (await getCollection('projects', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<Base title="Projects" description={`Side projects and experiments by ${site.name}: AI tooling, agents, and product prototypes.`}>
+  <section class="page-head">
+    <div class="wrap">
+      <span class="label">Projects</span>
+      <h1 class="page-title">Things I build to learn.</h1>
+      <p class="lead">Side projects, prototypes and experiments, mostly around LLMs and agent tooling. Each one has a short write-up: what I wanted to find out, what I built, and what I learned.</p>
+
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div>
+        {projects.length > 0 ? (
+          <div class="grid grid-3">{projects.map((entry) => <ProjectCard entry={entry} />)}</div>
+        ) : (
+          <div class="empty">
+            <span class="label">Coming soon</span>
+            <p>Write-ups are in progress. In the meantime, the products I've shipped at work are documented as case studies.</p>
+            <a class="btn btn-ghost" href="/experience">Read the case studies</a>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+</Base>
