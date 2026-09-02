@@ -21,3 +21,6 @@ IMG_*.jpg
 # Uploaded originals (png)
 *.png
 !public/**/*.png
+
+# Exported social assets kept locally
+LinkedIn-thumbnail-*.jpg
