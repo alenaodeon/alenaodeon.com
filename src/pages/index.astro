@@ -76,18 +76,6 @@ const principles = [
     </div>
   </section>
 
-  <!-- ===== Facts strip ===== -->
-  <section class="facts-strip">
-    <div class="wrap">
-      <dl class="facts">
-        <div><dt class="mono">Currently</dt><dd>AI Product Manager, Cybus</dd></div>
-        <div><dt class="mono">Focus</dt><dd>LLM assistants · MCP &amp; agent tooling · AI governance</dd></div>
-        <div><dt class="mono">Background</dt><dd>B.Sc. Applied Mathematics &amp; CS (AI) · M.Sc. Management, TUM</dd></div>
-        <div><dt class="mono">Previously</dt><dd>HealthTech PM at wellabe</dd></div>
-      </dl>
-    </div>
-  </section>
-
   <!-- ===== Selected work ===== -->
   <section class="section" id="work">
     <div class="wrap">
@@ -161,14 +149,6 @@ const principles = [
   .frame::after { content: ''; position: absolute; inset: 0; border-radius: 24px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4); pointer-events: none; }
   .frame img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
   .hero-photo::before { content: ''; position: absolute; inset: 14px -14px -14px 14px; border-radius: 24px; border: 1px solid var(--accent); opacity: 0.5; z-index: -1; }
-
-  .facts-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
-  .facts { margin: 0; display: grid; gap: 0; }
-  @media (min-width: 720px) { .facts { grid-template-columns: repeat(4, 1fr); } .facts div + div { border-left: 1px solid var(--line); padding-left: 20px; } }
-  .facts div { padding: 20px 0; }
-  @media (max-width: 719px) { .facts div + div { border-top: 1px solid var(--line); } }
-  .facts dt { margin-bottom: 4px; }
-  .facts dd { margin: 0; font-weight: 500; font-size: 15px; }
 
   .principle { position: relative; }
   .principle .num { display: block; color: var(--accent); margin-bottom: 14px; }
