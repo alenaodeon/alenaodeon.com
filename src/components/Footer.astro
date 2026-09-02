@@ -18,10 +18,15 @@ const year = new Date().getFullYear();
           <a class="btn btn-ghost" href={site.cv} download>Download CV</a>
         </div>
       </div>
-      <dl class="facts">
-        <div><dt class="mono">Based in</dt><dd>{site.location}</dd></div>
-        <div><dt class="mono">Currently</dt><dd>{site.now}</dd></div>
-      </dl>
+      <nav class="links" aria-label="Footer">
+        <span class="mono">Site</span>
+        <a href="/experience">Experience</a>
+        <a href="/projects">Projects</a>
+        <a href="/blog">Writing</a>
+        <span class="mono" style="margin-top:22px">Elsewhere</span>
+        <a href={site.linkedin} target="_blank" rel="noopener me">LinkedIn ↗</a>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </nav>
     </div>
     <div class="bottom">
       <span class="small muted">© {year} {site.name}</span>
@@ -35,10 +40,14 @@ const year = new Date().getFullYear();
   .top { display: grid; gap: 40px; }
   @media (min-width: 860px) { .top { grid-template-columns: 1.4fr 1fr; align-items: start; } }
   .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
-  .facts { margin: 0; display: grid; gap: 18px; padding-top: 6px; }
-  .facts div { border-top: 1px solid var(--line-2); padding-top: 14px; }
-  .facts dt { margin-bottom: 4px; }
-  .facts dd { margin: 0; font-weight: 500; }
+  .links { display: grid; gap: 10px; align-content: start; padding-top: 6px; }
+  .links .mono { margin-bottom: 2px; }
+  .links a { font-weight: 500; color: var(--ink-2); width: fit-content; border-bottom: 1px solid transparent; transition: color 0.15s, border-color 0.15s; }
+  .links a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  .links { display: grid; gap: 10px; align-content: start; padding-top: 6px; }
+  .links .mono { margin-bottom: 2px; }
+  .links a { font-weight: 500; color: var(--ink-2); width: fit-content; border-bottom: 1px solid transparent; transition: color 0.15s, border-color 0.15s; }
+  .links a:hover { color: var(--ink); border-bottom-color: var(--ink); }
   .bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line-2); }
   .mono-inline { font-family: var(--mono); font-size: 12.5px; text-transform: none; }
 </style>

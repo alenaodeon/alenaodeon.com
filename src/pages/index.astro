@@ -47,7 +47,7 @@ const principles = [
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <span class="mono eyebrow">{site.role} · {site.location}</span>
+        <span class="mono">{site.name} · {site.role} · {site.location}</span>
         <h1 class="display">
           I take AI products from <em>conception to launch</em>.<span class="cursor" aria-hidden="true"></span>
         </h1>
@@ -79,7 +79,7 @@ const principles = [
   <!-- ===== Selected work ===== -->
   <section class="section" id="work">
     <div class="wrap">
-      <SectionHead label="01 — Selected work" title="Products I've shipped" moreHref="/experience" moreLabel="Full experience" />
+      <SectionHead num="01" label="Selected work" title="Products I've shipped" moreHref="/experience" moreLabel="Full experience" />
       <div class="grid grid-2">
         {experience.map((entry) => <ExperienceCard entry={entry} />)}
       </div>
@@ -89,7 +89,7 @@ const principles = [
   <!-- ===== How I work ===== -->
   <section class="section" id="principles">
     <div class="wrap">
-      <SectionHead label="02 — How I work" title="Four things I believe about building AI products" />
+      <SectionHead num="02" label="How I work" title="Four things I believe about building AI products" />
       <div class="grid grid-2 principles">
         {principles.map((p) => (
           <div class="card principle">
@@ -105,12 +105,12 @@ const principles = [
   <!-- ===== Projects ===== -->
   <section class="section" id="projects">
     <div class="wrap">
-      <SectionHead label="03 — Projects" title="Side projects and experiments" moreHref={projects.length ? '/projects' : undefined} />
+      <SectionHead num="03" label="Projects" title="Side projects and experiments" moreHref={projects.length ? '/projects' : undefined} />
       {projects.length > 0 ? (
         <div class="grid grid-3">{projects.map((entry) => <ProjectCard entry={entry} />)}</div>
       ) : (
         <div class="empty">
-          <span class="mono">// coming soon</span>
+          <span class="mono">Coming soon</span>
           <p>Write-ups of side projects and experiments are in progress. Until then, the best evidence of how I build is in my work at Cybus.</p>
           <a class="btn btn-ghost" href="/experience">Read the case studies</a>
         </div>
@@ -121,12 +121,12 @@ const principles = [
   <!-- ===== Writing ===== -->
   <section class="section" id="writing">
     <div class="wrap">
-      <SectionHead label="04 — Writing" title="Notes on building AI products" moreHref={posts.length ? '/blog' : undefined} moreLabel="All posts" />
+      <SectionHead num="04" label="Writing" title="Notes on building AI products" moreHref={posts.length ? '/blog' : undefined} moreLabel="All posts" />
       {posts.length > 0 ? (
         <div>{posts.map((entry) => <PostRow entry={entry} />)}</div>
       ) : (
         <div class="empty">
-          <span class="mono">// first post in draft</span>
+          <span class="mono">First post in draft</span>
           <p>I'm writing about what it takes to ship LLM features that people can trust in production: evaluation, guardrails, and agent tooling. Until it lands here, I share shorter notes on LinkedIn.</p>
           <a class="btn btn-ghost" href={site.linkedin} target="_blank" rel="noopener">Follow on LinkedIn ↗</a>
         </div>
