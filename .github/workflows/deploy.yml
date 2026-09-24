@@ -20,10 +20,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install, build, and upload site
+
+      # Normal deploy: build the site. Skipped while SITE_OFFLINE is "true".
+      - name: Build and upload site
+        if: vars.SITE_OFFLINE != 'true'
         uses: withastro/action@v3
         with:
           node-version: 20
+
+      # Offline mode: publish the holding page instead of the site.
+      - name: Upload holding page
+        if: vars.SITE_OFFLINE == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: holding
 
   deploy:
     needs: build
